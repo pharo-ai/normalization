@@ -87,7 +87,7 @@ numbers standardized.
 numbers normalizedUsing: AIStandardizationNormalizer.
 ```
 
-## How to add new strategies
+## How to define new normalization strategies?
 
 Normalization is implemented using a [strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern). The `AI-Normalization` defines an abstract class `AINormalizer` which has one abstract method `AINormalizer class >> normalize: aCollection`. To define a normalization strategy, please implement a subclass of `AINormalizer` and provide your own definition of `normalize:`. Keep in mind that `normalize:` must not modify the given collection but return a new one.
 
