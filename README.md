@@ -94,5 +94,5 @@ Normalization is implemented using a [strategy design pattern](https://en.wikipe
 To normalize a collection using your own strategy call:
 
 ```Smalltalk
-numbers normalizeUsing: YourCustomNormalizer.
+numbers normalizedUsing: YourCustomNormalizer.
 ```
