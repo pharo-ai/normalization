@@ -4,9 +4,18 @@
 [![Coverage Status](https://coveralls.io/repos/github/pharo-ai/normalization/badge.svg?branch=master)](https://coveralls.io/github/pharo-ai/normalization?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/pharo-ai/normalization/master/LICENSE)
 
-This repository contains various strategies for normalizing numerical collections.
+Normalization is a technique often applied as part of data preparation for machine learning. The goal of normalization is to change the values of numeric columns in the dataset to use a common scale, without distorting differences in the ranges of values or losing information.
 
-We implement two normalization strategies: [Min-Max Normalization](https://en.wikipedia.org/wiki/Feature_scaling) and [Standardization](https://en.wikipedia.org/wiki/Standard_score). But you can easily define your own strategies by adding a subclass of `AINormalizer`.
+For example, consider that you have two collections, `ages` and `salaries`:
+
+```Smalltalk
+ages := #(25 19 30 32 41 50 24).
+salaries := #(1600 1000 2500 2400 5000 3500 2500).
+```
+
+Those collections are on a very different scale. The differences in salaries have larger magnitude than differences in age. Which can confuse some machine learning algorithms and force them to "think" that if the difference salaries is 600 (euros) and the difference in age is 6 (years), then salary difference is 100 times greater than age difference. Such algorithms require data to be normalized - for example, both ages and salaries can be transformed to a scale of [0, 1].
+
+There are different types of normalization. In this repository, we implement two most commonly used strategies: [Min-Max Normalization](https://en.wikipedia.org/wiki/Feature_scaling) and [Standardization](https://en.wikipedia.org/wiki/Standard_score). You can easily define your own strategy by adding a subclass of `AINormalizer`.
 
 ### Min-Max Normalization (a.k.a. Rescaling)
 
@@ -69,13 +78,13 @@ For the two normalization strategies that are defined in this package, we provid
 numbers rescaled.
 
 "is the same as"
-numbers normalisedUsing: AIMinMaxNormalizer.
+numbers normalizedUsing: AIMinMaxNormalizer.
 ```
 ```Smalltalk
 numbers standardized.
 
 "is the same as"
-numbers normalisedUsing: AIStandardizationNormalizer.
+numbers normalizedUsing: AIStandardizationNormalizer.
 ```
 
 ## How to add new strategies
