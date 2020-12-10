@@ -7,11 +7,13 @@ Collection class >> defaultNormalizer [
 
 { #category : #'*AI-Normalization' }
 Collection >> normalized [
+	"Normalize the numeric collection using the default normalizer"
 	^ self normalizedUsing: self class defaultNormalizer
 ]
 
 { #category : #'*AI-Normalization' }
 Collection >> normalizedUsing: aNormalizer [
+	"Normalize the numeric collection using the given normalizer"
 	^ aNormalizer normalize: self
 ]
 
