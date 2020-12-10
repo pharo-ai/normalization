@@ -1,6 +1,6 @@
 # Normalization Strategies for Machine Learning
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ldh776rmn3mldnoo?svg=true)](https://ci.appveyor.com/project/olekscode/normalization)
+[![Build status](https://github.com/pharo-ai/normalization/workflows/CI/badge.svg)]()
 [![Coverage Status](https://coveralls.io/repos/github/pharo-ai/normalization/badge.svg?branch=master)](https://coveralls.io/github/pharo-ai/normalization?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/pharo-ai/normalization/master/LICENSE)
 
