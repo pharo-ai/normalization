@@ -69,7 +69,8 @@ numbers normalized. "#(0.0169 0.004 0.0109 0.0089 0.0 1.0 0.007 0.0029)"
 By default, it will use the `AIMinMaxNormalizer`. If you want to use a different normalization strategy, you can call `normalizedUsing:` on a collection:
 
 ```Smalltalk
-numbers normalizedUsing: AIStandardizationNormalizer` "#(-0.3261 -0.3628 -0.343 -0.3487 -0.3741 2.475 -0.3541 -0.3658)"
+normalizer := AIStandardizationNormalizer new.
+numbers normalizedUsing: normalizer. "#(-0.3261 -0.3628 -0.343 -0.3487 -0.3741 2.475 -0.3541 -0.3658)"
 ```
 
 For the two normalization strategies that are defined in this package, we provide alias methods:
@@ -78,13 +79,23 @@ For the two normalization strategies that are defined in this package, we provid
 numbers rescaled.
 
 "is the same as"
-numbers normalizedUsing: AIMinMaxNormalizer.
+numbers normalizedUsing: AIMinMaxNormalizer new.
 ```
 ```Smalltalk
 numbers standardized.
 
 "is the same as"
-numbers normalizedUsing: AIStandardizationNormalizer.
+numbers normalizedUsing: AIStandardizationNormalizer new.
+```
+
+Each normalizer remembers the parameters of the original collection (e.g., min/max or mean/std) and can use them to restore the normalized collection to its original state:
+
+```Smalltalk
+numbers := #(10 -3 4 2 -7 1000 0.1 -4.05).
+
+normalizer := AIMinMaxNormalizer new.
+normalizedNumbers := normalizer normalize: numbers. "#(0.0169 0.004 0.0109 0.0089 0.0 1.0 0.007 0.0029)"
+restoredNumbers := normalizer restore: normalizedNumbers. "#(10 -3 4 2 -7 1000 0.1 -4.05)"
 ```
 
 ## How to define new normalization strategies?
