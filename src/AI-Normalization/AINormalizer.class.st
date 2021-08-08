@@ -8,7 +8,13 @@ Class {
 }
 
 { #category : #normalization }
-AINormalizer class >> normalize: aCollection [
+AINormalizer >> normalize: aCollection [
 	"Normalize a numeric collection. Subclasses should override this method to define different normalization strategies"
+	self subclassResponsibility
+]
+
+{ #category : #normalization }
+AINormalizer >> restore: aCollection [
+	"Restores the normalized collection to its original state. Subclasses should override this method based on the different normalization strategies"
 	self subclassResponsibility
 ]

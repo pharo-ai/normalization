@@ -8,17 +8,28 @@ $ x_i' = \\frac{x_i - x_{min}}{x_{max} - x_{min}} $
 Class {
 	#name : #AIMinMaxNormalizer,
 	#superclass : #AINormalizer,
+	#instVars : [
+		'min',
+		'max'
+	],
 	#category : #'AI-Normalization'
 }
 
 { #category : #normalization }
-AIMinMaxNormalizer class >> normalize: aCollection [
+AIMinMaxNormalizer >> normalize: aCollection [
 	"Normalize the numeric collection by transforming all numbers to a scale of [0, 1]"
-	| min max |
 	
 	min := aCollection min.
 	max := aCollection max.
 	
 	^ aCollection collect: [ :each |
 		(each - min) / (max - min) ]
+]
+
+{ #category : #normalization }
+AIMinMaxNormalizer >> restore: aCollection [
+	"Restores the normalized collection to its original state using the min and max values that were saved during the normalization"
+	
+	^ aCollection collect: [ :each |
+		each * (max - min) + min ]
 ]

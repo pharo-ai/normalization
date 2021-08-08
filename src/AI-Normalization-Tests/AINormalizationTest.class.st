@@ -25,14 +25,13 @@ AINormalizationTest >> testNormalized [
 
 { #category : #tests }
 AINormalizationTest >> testNormalizedUsing [
-	| standardizedCollection |
+	| normalizer standardizedCollection |
 	
-	standardizedCollection := collection normalizedUsing: AIStandardizationNormalizer.
+	normalizer := AIStandardizationNormalizer new.
+	standardizedCollection := collection normalizedUsing: normalizer.
 	
-	1 to: collection size do: [ :index |
-		self
-			assert: (standardizedCollection at: index)
-			closeTo: (expectedStandardizedCollection at: index) ].
+	standardizedCollection with: expectedStandardizedCollection do: [ :actual :expected |
+		self assert: actual closeTo: expected ].
 ]
 
 { #category : #tests }
@@ -41,13 +40,37 @@ AINormalizationTest >> testRescaled [
 ]
 
 { #category : #tests }
+AINormalizationTest >> testRestoreRescaling [
+	| normalizer normalizedCollection restoredCollection |
+	
+	normalizer := AIMinMaxNormalizer new.
+	
+	normalizedCollection := normalizer normalize: collection.
+	restoredCollection := normalizer restore: normalizedCollection.
+	
+	restoredCollection with: collection do: [ :actual :expected |
+		self assert: actual closeTo: expected ].
+]
+
+{ #category : #tests }
+AINormalizationTest >> testRestoreStandardization [
+	| normalizer normalizedCollection restoredCollection |
+	
+	normalizer := AIStandardizationNormalizer new.
+	
+	normalizedCollection := normalizer normalize: collection.
+	restoredCollection := normalizer restore: normalizedCollection.
+	
+	restoredCollection with: collection do: [ :actual :expected |
+		self assert: actual closeTo: expected ].
+]
+
+{ #category : #tests }
 AINormalizationTest >> testStandardized [
 	| standardizedCollection |
 	
 	standardizedCollection := collection standardized.
 	
-	1 to: collection size do: [ :index |
-		self
-			assert: (standardizedCollection at: index)
-			closeTo: (expectedStandardizedCollection at: index) ].
+	standardizedCollection with: expectedStandardizedCollection do: [ :actual :expected |
+		self assert: actual closeTo: expected ].
 ]
