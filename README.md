@@ -100,10 +100,11 @@ restoredNumbers := normalizer restore: normalizedNumbers. "#(10 -3 4 2 -7 1000 0
 
 ## How to define new normalization strategies?
 
-Normalization is implemented using a [strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern). The `AI-Normalization` defines an abstract class `AINormalizer` which has one abstract method `AINormalizer class >> normalize: aCollection`. To define a normalization strategy, please implement a subclass of `AINormalizer` and provide your own definition of `normalize:`. Keep in mind that `normalize:` must not modify the given collection but return a new one.
+Normalization is implemented using a [strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern). The `AI-Normalization` defines an abstract class `AINormalizer` which has two abstract methods `AINormalizer class >> normalize: aCollection` and `AINormalizer class >> restore: aCollection`. To define a normalization strategy, please implement a subclass of `AINormalizer` and provide your own definitions of `normalize:` and `restore:` methods. Keep in mind that those methods must not modify the given collection but return a new one.
 
-To normalize a collection using your own strategy call:
+To normalize a collection using your own strategy, call:
 
 ```Smalltalk
-numbers normalizedUsing: YourCustomNormalizer.
+normalizer := YourCustomNormalizer new.
+numbers normalizedUsing: normalizer.
 ```
