@@ -19,19 +19,19 @@ Class {
 
 { #category : #normalization }
 AIStandardizationNormalizer >> normalize: aCollection [
+
 	"Normalize the numeric collection by scaling all numbers to be centered around the mean with a unit standard deviation"
-	
+
 	mean := aCollection average.
 	std := aCollection stdev.
-	
-	^ aCollection collect: [ :each |
-		(each - mean) / std ]
+
+	^ aCollection collect: [ :each | each - mean / std ]
 ]
 
 { #category : #normalization }
 AIStandardizationNormalizer >> restore: aCollection [
+
 	"Restores the normalized collection to its original state using the std and mean values that were saved during the normalization"
-	
-	^ aCollection collect: [ :each |
-		each * std + mean ]
+
+	^ aCollection collect: [ :each | each * std + mean ]
 ]

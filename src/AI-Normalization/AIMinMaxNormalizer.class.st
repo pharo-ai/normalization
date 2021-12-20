@@ -17,19 +17,19 @@ Class {
 
 { #category : #normalization }
 AIMinMaxNormalizer >> normalize: aCollection [
+
 	"Normalize the numeric collection by transforming all numbers to a scale of [0, 1]"
-	
-	min := aCollection min.
-	max := aCollection max.
-	
-	^ aCollection collect: [ :each |
-		(each - min) / (max - min) ]
+
+	min ifNil: [ min := aCollection min ].
+	max ifNil: [ max := aCollection max ].
+
+	^ aCollection collect: [ :each | each - min / (max - min) ]
 ]
 
 { #category : #normalization }
 AIMinMaxNormalizer >> restore: aCollection [
+
 	"Restores the normalized collection to its original state using the min and max values that were saved during the normalization"
-	
-	^ aCollection collect: [ :each |
-		each * (max - min) + min ]
+
+	^ aCollection collect: [ :each | each * (max - min) + min ]
 ]
