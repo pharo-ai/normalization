@@ -4,6 +4,19 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/pharo-ai/normalization/master/LICENSE)
 
 
+/!\ THIS PROJECT WAS MOVED TO BE PART OF https://github.com/pharo-ai/data-preprocessing /!\
+Do not depend on my anymore.
+
+New way to load the code:
+
+```st
+spec
+  baseline: 'AIDataPreProcessing'
+  with: [ spec
+            repository: 'github://pharo-ai/data-preprocessing/src';
+            loads: 'Normalizers' ].
+```
+
 Normalization is a technique often applied as part of data preparation for machine learning. The goal of normalization is to change the values of numeric columns in the dataset to use a common scale, without distorting differences in the ranges of values or losing information.
 
 For example, consider that you have two collections, `ages` and `salaries`:
